@@ -1,29 +1,23 @@
-# boeing-nlp-ai
-Update your `README.md` using the template below. We are specifically interested in the installation instructions (e.g., all the gems, how to load real or seed data, etc.). This sample README was developed for a Rails project, so you can swap the "Gems" section of the "Installation" instructions to include add-ons that are relevant to you.
-
-If any of the sections in this template grows to more than one screen, consider placing it in its own file and linking to it from this file. Those files could live in a subdirectory called `docs`.
-
-**Make sure to check out the repo anew and test your installation instructions.**
-
-Provide a README file with the following information:
-
-# Project Name
+# Conversational Aerospace NLP Model
 
 ## Project summary
 
 ### One-sentence description of the project
 
-TODO: A 20-second elevator pitch of your project - its core idea summarized in one sentence.
+This project aims to create an internal Boeing ChatGPT, a conversational AI system, the gives Boeing stakeholders the ability to effortlessly summarize and comprehend large, complex technical documents.
 
 ### Additional information about the project
 
-TODO: Write a compelling/creative/informative project description / summary
+The Boeing NLP model will be your personal tool to navigate pilot operating handbooks, domain-specific documents, and much more. Within just a few keystrokes, you will be able to turn that 20-50 page document into a few paragraphs.
+
+Our goal is to successfully create an NLP model that can accurately and efficiently summarize these documents to increase productivity of Boeing employees. A user should be able to input a PDF or Word document to have it be summarized by our program. We will also implement ChatGPT internally as your personal AI co-pilot to navigate these complex documents with you. This program is your key to unlocking unlimited aerospace knowledge, increasing productivity, and expanding innovation at Boeing.
 
 ## Installation
 
 ### Prerequisites
 
-TODO: List what a user needs to have installed before running the installation instructions below (e.g., git, which versions of Ruby/Rails)
+1. Python 3
+
 
 ### Add-ons
 
@@ -31,20 +25,21 @@ TODO: List which add-ons are included in the project, and the purpose each add-o
 
 ### Installation Steps
 
-TODO: Describe the installation process (making sure you mention `bundle install`).
-Instructions need to be such that a user can just copy/paste the commands to get things set up and running. 
-
+```
+pip install -r requirements.txt
+```
+```
+python -m spacy download en_core_web_sm
+```
 
 ## Functionality
 
-TODO: Write usage instructions. Structuring it as a walkthrough can help structure this section,
-and showcase your features.
+See 'Startup Guide' for instructions (to be implemented)
 
 
 ## Known Problems
 
-TODO: Describe any known issues, bugs, odd behaviors or code smells. 
-Provide steps to reproduce the problem and/or name a file or a function where the problem lives.
+No known issues, bugs, odd behaviors or code smells. 
 
 
 ## Contributing
@@ -57,7 +52,6 @@ Provide steps to reproduce the problem and/or name a file or a function where th
 
 ## Additional Documentation
 
-TODO: Provide links to additional documentation that may exist in the repo, e.g.,
   * Sprint reports
   * User links
 
