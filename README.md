@@ -16,12 +16,13 @@ Our goal is to successfully create an NLP model that can accurately and efficien
 
 ### Prerequisites
 
-1. Python 3
+1. Github
+2. Python 3
 
 
 ### Add-ons
 
-TODO: List which add-ons are included in the project, and the purpose each add-on serves in your app.
+1. SpaCy: Used as our Natural Language Processor (NLP)
 
 ### Installation Steps
 
@@ -59,3 +60,11 @@ No known issues, bugs, odd behaviors or code smells.
 
 If you haven't already, add a file called `LICENSE.txt` with the text of the appropriate license.
 We recommend using the MIT license: <https://choosealicense.com/licenses/mit/>
+
+## Resources
+
+  * 2022-2023 Capstone Team Video - NLP Model: <https://vimeo.com/822183770?share=copy>
+  * 2021-2022 Capstone Team Video - Automated Taxonomies: <https://vimeo.com/705006982>
+  * 2021-2022 Capstone Team Project GitHub Repo: <https://github.com/WSUCptSCapstone-Fall2021Spring2022/boeing-naturallanguageprocessing>
+  * 2020-2021 Capstone Team Video - Semantic Vocabulary Extraction: <https://vimeo.com/522696857>
+  * 2020-2021 Capstone Team Project GitLab Repo: <https://gitlab.com/alorphan/pilot-operating-handbook-text-analysis>
