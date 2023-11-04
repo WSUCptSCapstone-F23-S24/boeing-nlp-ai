@@ -3,6 +3,9 @@
 This folder contains a side project for Resume Parsing and a Research Summary Report for SpaCy.
 This serves to prove that progress was made during Sprint 2.
 
+## Research Repo - Understanding SpaCy
+- https://github.com/erinlacaze/SpaCy_ResumeParser
+
 ## Resources
 - https://youtu.be/WpaioLNsoGI?si=C9fNK51ouVtDeFtf
 - https://youtu.be/C23DAW5iSiA?si=MFBi0WV6IQ_chmro
