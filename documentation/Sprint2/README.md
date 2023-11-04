@@ -1,2 +1,2 @@
 ## Sprint 2 Video Link:
-<link>
+<https://youtu.be/xvxmAXrsRIw>
