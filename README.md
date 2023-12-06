@@ -23,6 +23,9 @@ Our goal is to successfully create an NLP model that can accurately and efficien
 ### Add-ons
 
 1. SpaCy: Used as our Natural Language Processor (NLP)
+2. Fitz: Used to handle PDF documents
+3. RE: Used to handle Regular Expressions
+4. Tkinter: Used to traverse file paths
 
 ### Installation Steps
 
@@ -32,6 +35,12 @@ pip install -r requirements.txt
 ```
 python -m spacy download en_core_web_sm
 ```
+```
+python -m spacy download en_core_web_md
+```
+```
+python -m spacy download en_core_web_lg
+```
 
 ## Functionality
 
@@ -40,7 +49,7 @@ See 'Startup Guide' for instructions (to be implemented)
 
 ## Known Problems
 
-No known issues, bugs, odd behaviors or code smells. 
+NLP must be optimized to result in a more accurate summary. Possibly using different implementation or custom training models would be a solution for this. 
 
 
 ## Contributing
@@ -53,8 +62,12 @@ No known issues, bugs, odd behaviors or code smells.
 
 ## Additional Documentation
 
-  * Sprint reports
-  * User links
+  * [Sprint 1 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint1/Sprint_Report_1.md)
+  * [Sprint 1 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint1/README.md)
+  * [Sprint 2 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint2/Sprint_Report_2.md)
+  * [Sprint 2 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint2/README.md)
+  * [Sprint 3 Report]()
+  * [Sprint 3 Video]()
 
 ## License
 

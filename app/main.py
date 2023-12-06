@@ -2,6 +2,7 @@ import spacy
 import fitz  # PyMuPDF
 import re
 from collections import Counter
+from tkinter import Tk, filedialog
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -23,7 +24,16 @@ def process_large_document(document_path):
 
     document_text = re.sub(r'\.{3,}', ' ', document_text)
 
-    nlp = spacy.load("en_core_web_sm")
+     # load different spaCy models based on document size
+    if len(document_text) < 1000000:
+        nlp = spacy.load("en_core_web_sm")
+    elif len(document_text) < 10000000:
+        nlp = spacy.load("en_core_web_md")
+    else:
+        nlp = spacy.load("en_core_web_lg")
+
+    # increase the max_length limit
+    nlp.max_length = len(document_text) + 1000000
 
     doc = nlp(document_text)
 
@@ -67,8 +77,14 @@ def print_results_to_file(output_file, formatted_sentences, tokens, entities, su
         file.write("\n### Summary ###\n")
         file.write(''.join([sentence.text + '\n' for sentence in summary]))
 
+def get_file_path(title):
+    root = Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(title=title)
+    return file_path
+
 def main():
-    print("Welcome to the Document Processing Program!")
+    print("Welcome to the Boeing NLP Document Processing Program!")
     print("Please choose an option:")
     print("1. Process a document and generate a summary")
     print("2. Exit")
@@ -76,8 +92,8 @@ def main():
     choice = input("Enter the option number: ")
 
     if choice == "1":
-        document_path = input("Enter the path to the document (PDF or text file): ")
-        output_file = input("Enter the path to the output file: ")
+        document_path = get_file_path("Select Document File (PDF or text file)")
+        output_file = get_file_path("Select Output File")
 
         formatted_sentences, tokens, entities, doc = process_large_document(document_path)
         summary_sentences = generate_summary(doc)
