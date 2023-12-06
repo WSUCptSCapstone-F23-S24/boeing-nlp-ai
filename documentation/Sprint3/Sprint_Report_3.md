@@ -30,7 +30,7 @@ Here are links to the issues that we completed in this sprint:
 
 ## Code Files for Review
 Please review the following code files, which were actively developed during this sprint, for quality:
- * [executions.ipynb](https://github.com/erinlacaze/SpaCy_ResumeParser/blob/master/executions.ipynb)
+ * [main.py](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/app/main.py)
  
 ## Retrospective Summary
 Here's what went well:
