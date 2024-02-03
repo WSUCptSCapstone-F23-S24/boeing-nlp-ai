@@ -1,8 +1,12 @@
 import spacy
 import fitz  # PyMuPDF
 import re
+from entry_map import entity_mapping
+from spacy.pipeline import EntityRuler
 from collections import Counter
 from tkinter import Tk, filedialog
+
+# Entity mapping
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -14,6 +18,15 @@ def extract_text_from_pdf(pdf_path):
 
     doc.close()
     return text
+
+def create_entity_ruler(nlp, entity_mapping):
+    ruler = nlp.add_pipe("entity_ruler")  # Add a new EntityRuler to the pipeline
+    patterns = []
+    for label, terms in entity_mapping.items():
+        for term in terms:
+            patterns.append({"label": label, "pattern": term})
+    ruler.add_patterns(patterns)
+    return nlp
 
 def process_large_document(document_path):
     if document_path.endswith(".pdf"):
@@ -31,6 +44,8 @@ def process_large_document(document_path):
         nlp = spacy.load("en_core_web_md")
     else:
         nlp = spacy.load("en_core_web_lg")
+        
+    nlp = create_entity_ruler(nlp, entity_mapping)
 
     # increase the max_length limit
     nlp.max_length = len(document_text) + 1000000
@@ -51,12 +66,14 @@ def contains_number(sentence):
 def generate_summary(doc, top_n=3):
     words = [word.text.lower() for word in doc]
     word_freq = Counter(words)
+    
+    taxonomy_labels = set(entity_mapping.keys())
 
-    sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence), reverse=True)
+    sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence if word.ent_type_ in taxonomy_labels and not contains_number(word)), reverse=True)
 
     filtered_sentences = [sentence for sentence in sorted_sentences if not contains_number(sentence)]
 
-    top_sentences = filtered_sentences[:top_n]
+    top_sentences = sorted_sentences[:top_n]
 
     return top_sentences
 
