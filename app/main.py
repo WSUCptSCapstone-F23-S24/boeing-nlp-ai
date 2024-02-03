@@ -1,70 +1,12 @@
 import spacy
 import fitz  # PyMuPDF
 import re
+from entry_map import entity_mapping
 from spacy.pipeline import EntityRuler
 from collections import Counter
 from tkinter import Tk, filedialog
 
 # Entity mapping
-entity_mapping = {
-    "PERSON": [
-        "Pilot", "Co-pilot", "Flight Engineer", "Navigator",
-        "Aircraft Mechanic", "Air Traffic Controller",
-        "Avionics Technician", "Safety Officer", "Passenger",
-    ],
-
-    "EMPENNAGE": [
-        "Horizontal Stabilizer", "Vertical Stabilizer", "Elevator", "Rudder",
-        "Trim Tabs", "Fin", "Tailplane", "Stabilator", "Raked Wingtips"
-    ],
-
-    "FUSELAGE": [
-        "Cabin", "Cargo Hold", "Bulkhead", "Hatch", "Airframe", "Cockpit Door",
-        "Window", "Fuselage Frame", "Pressure Bulkhead", "Al-Li", "Carbon Composite Materials",
-        "Winglets", "Blended Winglets on 737NG", "Raked Wingtips on 787", "Double-Decker Configuration",
-        "Overhead Bins", "Lavatories"
-    ],
-
-    "COCKPIT": [
-        "Control Column", "Instrument Panel", "Throttle Quadrant", "Rudder Pedals",
-        "Autopilot Control", "Ejection Seat", "MFD (Multi-Function Display)", "Honeywell Avionics",
-        "Rockwell Collins Flight Deck", "Boeing Sky Interior", "Enhanced Flight Vision System (EFVS)",
-        "Head-Up Display (HUD)", "Electronic Flight Bag (EFB)", "Flight Director", "Control Display Units",
-        "Multi-Functional Display", "Auto-Throttle", "Flight Management Computer (FMC)"
-    ],
-
-    "RUNNING_LANDING_GEAR": [
-        "Main Gear", "Nose Gear", "Tires", "Brakes", "Shock Absorber", "Retraction Mechanism",
-        "Wheel Well", "Landing Gear Doors", "Wheels", "Runway", "Auto-Throttle"
-    ],
-
-    "ENGINE": [
-        "Turbine", "Compressor", "Combustor", "Fan", "Nozzle", "Exhaust",
-        "Fuel Injector", "Thrust Reverser", "Nacelle", "CFM56", "GEnx", "GE90",
-        "PW4000", "LEAP-1B", "Rolls-Royce Trent 1000", "Rolls-Royce Trent 800", "PW4090",
-        "Rolls-Royce Trent 800", "General Electric GE90", "Pratt & Whitney PW4090"
-    ],
-
-    "AIRPLANE_MODEL": [
-        "Boeing 720", "Boeing 777", "Convair 990", "Boeing 757",
-        "Boeing 767", "Airbus 300", "Boeing 747", "Boeing 777-200ER",
-        "Boeing 777-300ER"
-    ],
-
-    "AIRCRAFT_SPECIFICATIONS": [
-        "Dimensions", "Weights", "Capacity", "Power plants", "Field lengths",
-        "Range", "Speed", "Altitude", "Max Take Off Weight (MTOW)", "Fuel Capacity",
-        "Cruise Altitude"
-    ],
-
-    "OPERATING_PROCEDURES": [
-        "Pre-Flight", "Gate departure", "Takeoff", "Climb", "Cruise", "Descent",
-        "Approach", "Landing", "Taxi to Terminal", "Securing the Aircraft", "Engine fire",
-        "Engine failure", "Power loss", "Gear stuck",  "Pre-Flight Checklist", "Taxi to Terminal",
-        "Securing the Aircraft", "Missed Approach Procedure"
-    ]
-
-}
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -78,13 +20,12 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 def create_entity_ruler(nlp, entity_mapping):
-    ruler = EntityRuler(nlp)
+    ruler = nlp.add_pipe("entity_ruler")  # Add a new EntityRuler to the pipeline
     patterns = []
     for label, terms in entity_mapping.items():
         for term in terms:
             patterns.append({"label": label, "pattern": term})
     ruler.add_patterns(patterns)
-    nlp.add_pipe(ruler, before="ner")
     return nlp
 
 def process_large_document(document_path):
@@ -128,11 +69,11 @@ def generate_summary(doc, top_n=3):
     
     taxonomy_labels = set(entity_mapping.keys())
 
-    sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence if word.ent_type_ in taxonomy_labels), reverse=True)
+    sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence if word.ent_type_ in taxonomy_labels and not contains_number(word)), reverse=True)
 
     filtered_sentences = [sentence for sentence in sorted_sentences if not contains_number(sentence)]
 
-    top_sentences = filtered_sentences[:top_n]
+    top_sentences = sorted_sentences[:top_n]
 
     return top_sentences
 
