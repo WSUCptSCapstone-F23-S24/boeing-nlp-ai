@@ -5,122 +5,93 @@ from entry_map import entity_mapping
 from spacy.pipeline import EntityRuler
 from collections import Counter
 from tkinter import Tk, filedialog
-
-# Entity mapping
+from summarizer import Summarizer
 
 def extract_text_from_pdf(pdf_path):
-    doc = fitz.open(pdf_path)
-    text = ""
-
-    for page_num in range(doc.page_count):
-        page = doc[page_num]
-        text += page.get_text()
-
-    doc.close()
-    return text
+    try:
+        doc = fitz.open(pdf_path)
+        text = ''.join([doc[page_num].get_text() for page_num in range(doc.page_count)])
+        doc.close()
+        return text
+    except Exception as e:
+        print(f"Error reading PDF file: {e}")
+        return ""
 
 def create_entity_ruler(nlp, entity_mapping):
-    ruler = nlp.add_pipe("entity_ruler")  # Add a new EntityRuler to the pipeline
-    patterns = []
-    for label, terms in entity_mapping.items():
-        for term in terms:
-            patterns.append({"label": label, "pattern": term})
+    ruler = nlp.add_pipe("entity_ruler", before="ner")
+    patterns = [{"label": label, "pattern": term} for label, terms in entity_mapping.items() for term in terms]
     ruler.add_patterns(patterns)
     return nlp
 
 def process_large_document(document_path):
-    if document_path.endswith(".pdf"):
-        document_text = extract_text_from_pdf(document_path)
-    else:
-        with open(document_path, 'r', encoding='utf-8') as file:
-            document_text = file.read()
+    document_text = ""
+    try:
+        if document_path.endswith(".pdf"):
+            document_text = extract_text_from_pdf(document_path)
+        else:
+            with open(document_path, 'r', encoding='utf-8') as file:
+                document_text = file.read()
+    except Exception as e:
+        print(f"Error processing document: {e}")
+        return "", [], [], None
 
-    document_text = re.sub(r'\.{3,}', ' ', document_text)
+    document_text = re.sub(r'\s+', ' ', document_text)  # Normalize whitespace
 
-     # load different spaCy models based on document size
-    if len(document_text) < 1000000:
-        nlp = spacy.load("en_core_web_sm")
-    elif len(document_text) < 10000000:
-        nlp = spacy.load("en_core_web_md")
-    else:
-        nlp = spacy.load("en_core_web_lg")
-        
+    nlp_model = "en_core_web_sm" if len(document_text) < 1e6 else "en_core_web_md" if len(document_text) < 1e7 else "en_core_web_lg"
+    nlp = spacy.load(nlp_model)
     nlp = create_entity_ruler(nlp, entity_mapping)
-
-    # increase the max_length limit
-    nlp.max_length = len(document_text) + 1000000
+    nlp.max_length = max(nlp.max_length, len(document_text) + 1)  # Safely increase max_length if needed
 
     doc = nlp(document_text)
-
-    sentences = [sent.text + '\n' for sent in doc.sents if sent.text.strip() != '']
-    formatted_sentences = ''.join(sentences)
-
+    formatted_sentences = '\n'.join(sent.text.strip() for sent in doc.sents if sent.text.strip())
     tokens = [token.text for token in doc]
     entities = [(ent.text, ent.label_) for ent in doc.ents]
 
     return formatted_sentences, tokens, entities, doc
 
-def contains_number(sentence):
-    return any(char.isdigit() for char in sentence.text)
-
-def generate_summary(doc, top_n=3):
-    words = [word.text.lower() for word in doc]
-    word_freq = Counter(words)
-    
-    taxonomy_labels = set(entity_mapping.keys())
-
-    sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence if word.ent_type_ in taxonomy_labels and not contains_number(word)), reverse=True)
-
-    filtered_sentences = [sentence for sentence in sorted_sentences if not contains_number(sentence)]
-
-    top_sentences = sorted_sentences[:top_n]
-
-    return top_sentences
+def generate_summary(doc, ratio=0.2):
+    text = doc.text
+    summarizer = Summarizer()
+    try:
+        summary = summarizer(text, ratio=ratio)
+    except Exception as e:
+        print(f"Error generating summary: {e}")
+        return []
+    return summary.split('\n')
 
 def print_results_to_file(output_file, formatted_sentences, tokens, entities, summary):
-    with open(output_file, 'w', encoding='utf-8') as file:
-        file.write("### Sentences ###\n")
-        file.write(formatted_sentences)
-
-        file.write("\n### Tokens ###\n")
-        clean_tokens = [token.replace("\n", "") for token in tokens]
-        file.write(str(clean_tokens) + '\n')
-
-        file.write("\n### Named Entities ###\n")
-        for entity, label in entities:
-            clean_entity = entity.replace("\n", "")
-            file.write(f"Entity: {clean_entity}, Label: {label}\n")
-
-        file.write("\n### Summary ###\n")
-        file.write(''.join([sentence.text + '\n' for sentence in summary]))
+    try:
+        with open(output_file, 'w', encoding='utf-8') as file:
+            file.writelines(["### Sentences ###\n", formatted_sentences + "\n\n",
+                             "### Tokens ###\n", ', '.join(tokens) + "\n\n",
+                             "### Named Entities ###\n"] +
+                            [f"{ent}: {label}\n" for ent, label in entities] +
+                            ["\n### Summary ###\n"] +
+                            [sentence + "\n" for sentence in summary])
+    except Exception as e:
+        print(f"Error writing results to file: {e}")
 
 def get_file_path(title):
     root = Tk()
-    root.withdraw()
+    root.withdraw()  # Hide the root window
     file_path = filedialog.askopenfilename(title=title)
+    root.destroy()  # Close the root window after selection
     return file_path
 
 def main():
     print("Welcome to the Boeing NLP Document Processing Program!")
-    print("Please choose an option:")
-    print("1. Process a document and generate a summary")
-    print("2. Exit")
-
-    choice = input("Enter the option number: ")
-
+    choice = input("Enter 1 to process a document and generate a summary, or 2 to exit: ")
     if choice == "1":
         document_path = get_file_path("Select Document File (PDF or text file)")
         output_file = get_file_path("Select Output File")
-
         formatted_sentences, tokens, entities, doc = process_large_document(document_path)
         summary_sentences = generate_summary(doc)
         print_results_to_file(output_file, formatted_sentences, tokens, entities, summary_sentences)
-
         print(f"Results saved to {output_file}")
     elif choice == "2":
-        print("Exiting the program.")
+        print("Exiting the program...")
     else:
-        print("Invalid option. Please choose a valid option.")
-
+        print("Invalid option. Please enter 1 or 2.")
+        
 if __name__ == "__main__":
     main()

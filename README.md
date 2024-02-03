@@ -26,6 +26,7 @@ Our goal is to successfully create an NLP model that can accurately and efficien
 2. Fitz: Used to handle PDF documents
 3. RE: Used to handle Regular Expressions
 4. Tkinter: Used to traverse file paths
+5. BERT Summarizer: Used to assist in summarizing large documents after parsed
 
 ### Installation Steps
 
@@ -49,7 +50,7 @@ See 'Startup Guide' for instructions (to be implemented)
 
 ## Known Problems
 
-NLP must be optimized to result in a more accurate summary. Possibly using different implementation or custom training models would be a solution for this. 
+NLP must be optimized to result in a more accurate summary. Improvement of custom training model can assist with this problem.
 
 
 ## Contributing
@@ -66,8 +67,10 @@ NLP must be optimized to result in a more accurate summary. Possibly using diffe
   * [Sprint 1 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint1/README.md)
   * [Sprint 2 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint2/Sprint_Report_2.md)
   * [Sprint 2 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint2/README.md)
-  * [Sprint 3 Report]()
-  * [Sprint 3 Video]()
+  * [Sprint 3 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint3/Sprint_Report_3.md)
+  * [Sprint 3 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint3/README.md)
+  * [Sprint 4 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint4/Sprint_Report_4.md)
+  * [Sprint 4 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint4/README.md)
 
 ## License
 
