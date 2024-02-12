@@ -16,6 +16,7 @@ def extract_text_from_pdf(pdf_path):
         page = doc[page_num]
         text += page.get_text()
 
+    text = text.replace("�", "")
     doc.close()
     return text
 
@@ -46,7 +47,7 @@ def process_large_document(document_path):
         nlp = spacy.load("en_core_web_lg")
         
     nlp = create_entity_ruler(nlp, entity_mapping)
-
+ 
     # increase the max_length limit
     nlp.max_length = len(document_text) + 1000000
 
@@ -71,7 +72,7 @@ def generate_summary(doc, top_n=3):
 
     sorted_sentences = sorted(doc.sents, key=lambda sentence: sum(word_freq[word.text.lower()] for word in sentence if word.ent_type_ in taxonomy_labels and not contains_number(word)), reverse=True)
 
-    filtered_sentences = [sentence for sentence in sorted_sentences if not contains_number(sentence)]
+    # filtered_sentences = [sentence for sentence in sorted_sentences if not contains_number(sentence)]
 
     top_sentences = sorted_sentences[:top_n]
 
