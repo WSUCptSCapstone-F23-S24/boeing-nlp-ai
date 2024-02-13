@@ -16,7 +16,7 @@ def extract_text_from_pdf(pdf_path):
         page = doc[page_num]
         text += page.get_text()
 
-    text = text.replace("�", "")
+    text = text.replace("�", "-")
     doc.close()
     return text
 
