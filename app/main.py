@@ -59,15 +59,27 @@ def generate_summary(doc, ratio=0.2):
         return []
     return summary.split('\n')
 
-def print_results_to_file(output_file, formatted_sentences, tokens, entities, summary):
+def print_results_to_file(output_file, formatted_sentences, entities, summary):
     try:
         with open(output_file, 'w', encoding='utf-8') as file:
-            file.writelines(["### Sentences ###\n", formatted_sentences + "\n\n",
-                             "### Tokens ###\n", ', '.join(tokens) + "\n\n",
-                             "### Named Entities ###\n"] +
-                            [f"{ent}: {label}\n" for ent, label in entities] +
-                            ["\n### Summary ###\n"] +
-                            [sentence + "\n" for sentence in summary])
+            # Replace question mark characters in each section before writing
+            formatted_sentences_clean = formatted_sentences.replace('�', '')
+            entities_clean = [(ent.replace('�', ''), label) for ent, label in entities]
+            
+            # Assuming summary_clean is a list of sentences/paragraphs
+            summary_clean = [sentence.replace('�', '') for sentence in summary]
+
+            file.write("### Sentences ###\n")
+            file.write(formatted_sentences_clean + "\n\n")
+            file.write("### Named Entities ###\n")
+            for ent, label in entities_clean:
+                file.write(f"{ent}: {label}\n")
+            file.write("\n### Summary ###\n")
+            
+            # each sentence/paragraph of the summary on a new line
+            for sentence in summary_clean:
+                # new line between paragraphs/sentences for better readability -- not functional atm
+                file.write(sentence + "\n")
     except Exception as e:
         print(f"Error writing results to file: {e}")
 
@@ -84,14 +96,34 @@ def main():
     if choice == "1":
         document_path = get_file_path("Select Document File (PDF or text file)")
         output_file = get_file_path("Select Output File")
+        
+        # Ask the user for specific entities they want to highlight
+        entity_input = input("Enter the entities you want to highlight (separated by comma, e.g., PERSON,ENGINE): ")
+        entity_list = [entity.strip().upper() for entity in entity_input.split(',')]
+        
+        # Ask the user to set the summary length
+        summary_length_input = input("Enter the summary length as a percentage of the original text (e.g., 20 for 20%): ")
+        try:
+            summary_length = float(summary_length_input) / 100
+        except ValueError:
+            print("Invalid summary length. Setting to default 20%.")
+            summary_length = 0.2
+
         formatted_sentences, tokens, entities, doc = process_large_document(document_path)
-        summary_sentences = generate_summary(doc)
-        print_results_to_file(output_file, formatted_sentences, tokens, entities, summary_sentences)
+        
+        # Filter entities based on user selection
+        highlighted_entities = [(ent, label) for ent, label in entities if label in entity_list]
+        
+        summary_sentences = generate_summary(doc, ratio=summary_length)
+        
+        # Call modified print_results_to_file to include only the relevant entities
+        print_results_to_file(output_file, formatted_sentences, highlighted_entities, summary_sentences)
+        
         print(f"Results saved to {output_file}")
     elif choice == "2":
         print("Exiting the program...")
     else:
         print("Invalid option. Please enter 1 or 2.")
-        
+
 if __name__ == "__main__":
     main()

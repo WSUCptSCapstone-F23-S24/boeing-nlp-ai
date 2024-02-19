@@ -45,6 +45,8 @@ python -m spacy download en_core_web_lg
 
 ## Functionality
 
+'cd' into `./app` and run `python app.py`
+
 See 'Startup Guide' for instructions (to be implemented)
 
 
