@@ -341,6 +341,20 @@ This manual is freeware and is not to be included with any 'for sale' product.
 Rolls-Royce Trent 800: ENGINE
 General Electric GE90: ENGINE
 Pratt & Whitney PW4090: ENGINE
+Pre-Flight: OPERATING_PROCEDURES
+Takeoff: OPERATING_PROCEDURES
+Climb: OPERATING_PROCEDURES
+Cruise: OPERATING_PROCEDURES
+Descent: OPERATING_PROCEDURES
+Approach: OPERATING_PROCEDURES
+Landing: OPERATING_PROCEDURES
+Taxi to Terminal: OPERATING_PROCEDURES
+Securing the Aircraft: OPERATING_PROCEDURES
+Takeoff: OPERATING_PROCEDURES
+Takeoff: OPERATING_PROCEDURES
+Approach: OPERATING_PROCEDURES
+Approach: OPERATING_PROCEDURES
+Landing: OPERATING_PROCEDURES
 GE90: ENGINE
 GE90: ENGINE
 GE90: ENGINE
@@ -352,8 +366,17 @@ PW4090: ENGINE
 PW4000: ENGINE
 PW4000: ENGINE
 PW4000: ENGINE
+Landing: OPERATING_PROCEDURES
 General Electric GE90: ENGINE
 Pratt & Whitney PW4090: ENGINE
+Landing: OPERATING_PROCEDURES
+Cruise: OPERATING_PROCEDURES
+Landing: OPERATING_PROCEDURES
+Descent: OPERATING_PROCEDURES
+Landing: OPERATING_PROCEDURES
+Approach: OPERATING_PROCEDURES
+Landing: OPERATING_PROCEDURES
+Approach: OPERATING_PROCEDURES
 
 ### Summary ###
-Early airliners such as the Boeing 720 could cruise up to Mach 0.90, and the Convair 990 reached speeds up to Mach 0.97. The airplane is larger than all other twinjet or tri-jet airplanes, yet smaller than the 747 and it brings the twin-engine economic advantage to medium- and long-range markets. Launched in February 2000, the two airplanes can fly farther and faster than the A340 competition. Airlines will have additional flexibility in serving the non-stop routes that passengers demand. On February 15th, 1996 the 777 was named the winner of the prestigious Robert J. Collier Trophy by the U.S. National Aeronautic Association, honoring the 777 as the top aeronautical achievement of 1995. Low weight and high thrust equates to optimum revenue earning capability. The most recent model, the PW4098, was certified in July 1998. The PW4000 112-inch fan engine retains the excellent accessibility and component modularity of other PW4000 family members to reduce maintenance time and cost. Boeing 777-200ER Aircraft Operating Manual PAGE 6 The 777-300 flight deck includes a Ground Maneuver Camera System (GMCS), designed to assist the pilot in ground maneuvering the 777-300 with camera views of the nose gear and main gear areas. By standardizing procedures the company can budget flights better financially as flights will always be the same or at least somewhat similar. If fuel in center check, check cross-feed configuration for engine start and take-off.  Make sure throttle is at idle and start engines. DESCENT  Review STAR / ILS charts and weather conditions at destination. Boeing 777-200ER Aircraft Operating Manual PAGE 16  Execute “In Range” Checklist.  Enter missed approach altitude into MCP.  Ensure Auto-brake has engaged and if not engage manually.  If possible continue to destination otherwise attempt to return to origin, inform ATC of intentions and situation.  Stay on or above the glide slope at all times.  Use lowest possible landing speed to minimize damage. This will give the pilot more room to recover and with the 777’s advanced braking capabilities, slowing after a hot landing is not as difficult as in other large aircraft such as the 767-400, 747-400 and 340-600. Most 777 routes are international routes and therefore the 777 pilots (along with the MD-11 pilots) should be the most knowledgeable when it comes to trans-oceanic and international flight planning. The authors grant unlimited rights to Delta Virtual Airlines for modifications and electronic distribution. This is a reference for the virtual flying world and is not to be used for real world aviation.
+Early airliners such as the Boeing 720 could cruise up to Mach 0.90, and the Convair 990 reached speeds up to Mach 0.97. The oil crisis of 1973 accelerated a trend that began with the Boeing 747 – a trend towards larger, more economical airliners. Originally, they started out with a 767 derivative called the 767-X. After initial customer feedback, this derivative design was scrapped in favor of a completely new aircraft that became the 777. The airplane is larger than all other twinjet or tri-jet airplanes, yet smaller than the 747 and it brings the twin-engine economic advantage to medium- and long-range markets. Airlines will have additional flexibility in serving the non-stop routes that passengers demand. On May 30th, 1995 the 777 became the first airplane in aviation history to earn U.S. Federal Aviation Administration (FAA) approval to fly 180-minute extended range twin- engine operations (ETOPS) at service entry. Air France, Japan Airlines, All Nippon, EVA, International Lease Finance, and GE Capital Aviation Services have ordered a total of 49 firm 777 longer-range aircraft. The new displays save space, weigh less, require less power and generate less heat, which contributes to greater reliability and a longer service life. The CDUs have color displays, again in response to market preferences. A Boeing-patented two-way digital data bus, ARINC 629, has been adopted as a new industry standard. It permits airplane systems and associated computers to communicate with one another through a common wire path (a twisted pair of wires) instead of through separate one-way wire connections. Enhanced Ground Proximity Warning System (EGPWS) is standard equipment. Boeing 777-200ER Aircraft Operating Manual PAGE 6 The 777-300 flight deck includes a Ground Maneuver Camera System (GMCS), designed to assist the pilot in ground maneuvering the 777-300 with camera views of the nose gear and main gear areas.  However, with that said it is always the pilot's responsibility to ensure that there is enough legal fuel for the flight.  Any trip estimations that you see in this manual are for calm winds and standard temperatures, any deviation from standard, winds or temperature will result in different actual performance for your aircraft. The FAA states that you must have enough fuel to reach your destination, make a missed approach, reach your alternate and hold for 30 minutes. Discretion is the responsibility of the Captain. As soon as APU has started, check APU bleed air valve open, packs auto and recirculation fans on.  Obtain clearance from Delivery  Execute “Receiving Aircraft” checklist.  Make sure throttle is at idle and start engines. o Set seatbelt sign to auto, leave no-smoking on  At transition altitude: o reset altimeters to STD pressure.  Select Gear DOWN when the glide slope is one dot above.  Disconnect APU bleed, Engine Bleed  Disconnect external power and turn off APU. Never try and salvage a landing out of a poor final approach.  Ensure Auto-brake has engaged and if not engage manually.  APU – Start to provide second generator source.  Reduce altitude to one where acceptable power setting can be established.  Reduce cruise speed to Mach 0.65 or less.  If possible continue to destination otherwise attempt to return to origin, inform ATC of intentions and situation.  Do not use Thrust reversers on rollout. TOTAL POWER LOSS  Determine if possible to reach airfield, if not search for an appropriate field or clearing to land in. Boeing 777-200ER Aircraft Operating Manual PAGE 23 PILOT NOTES AND OBSERVATIONS While the 777 is one of the most technologically advanced commercial aircraft in the world, pilots should always remember that the 777 is still a very large aircraft. This will give the pilot more room to recover and with the 777’s advanced braking capabilities, slowing after a hot landing is not as difficult as in other large aircraft such as the 767-400, 747-400 and 340-600.  There is no guarantee of the accuracy of this information.
