@@ -1,4 +1,4 @@
-pytest==6.2.3
-spacy==3.0.7
+pytest==7.1.2
+spacy==3.7.2
 PyMuPDF==1.18.17
 bert-extractive-summarizer==0.8.1
