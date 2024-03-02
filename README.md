@@ -27,6 +27,7 @@ Our goal is to successfully create an NLP model that can accurately and efficien
 3. RE: Used to handle Regular Expressions
 4. Tkinter: Used to traverse file paths
 5. BERT Summarizer: Used to assist in summarizing large documents after parsed
+6. Flask: Used to create web application
 
 ### Installation Steps
 
@@ -45,7 +46,7 @@ python -m spacy download en_core_web_lg
 
 ## Functionality
 
-'cd' into `./app` and run `python app.py`
+'cd' into `./app` and run `python app.py` (for web app) OR `python main.py` (basic command line)
 
 See 'Startup Guide' for instructions (to be implemented)
 
@@ -73,6 +74,8 @@ NLP must be optimized to result in a more accurate summary. Improvement of custo
   * [Sprint 3 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint3/README.md)
   * [Sprint 4 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint4/Sprint_Report_4.md)
   * [Sprint 4 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint4/README.md)
+  * [Sprint 5 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint5/Sprint_Report_5.md)
+  * [Sprint 5 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint5/README.md)
 
 ## License
 
