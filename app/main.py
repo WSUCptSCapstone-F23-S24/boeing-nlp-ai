@@ -6,6 +6,7 @@ from entry_map import entity_mapping
 from spacy.pipeline import EntityRuler
 from collections import Counter
 from tkinter import Tk, filedialog
+from datetime import datetime
 
 # Entity mapping
 
@@ -31,44 +32,55 @@ def create_entity_ruler(nlp, entity_mapping):
     return nlp
 
 def process_large_document(document_path):
-    if document_path.endswith(".pdf"):
-        document_text = extract_text_from_pdf(document_path)
-    else:
-        with open(document_path, 'r', encoding='utf-8') as file:
-            document_text = file.read()
+    print(f'{datetime.now()}: Loading document')
+    with tqdm(total=5, desc="Processing", ncols=100) as pbar:
+        if document_path.endswith(".pdf"):
+            document_text = extract_text_from_pdf(document_path)
+        else:
+            with open(document_path, 'r', encoding='utf-8') as file:
+                document_text = file.read()
+        pbar.update()
 
-    document_text = re.sub(r'\.{3,}', ' ', document_text)
-    
-    # Identify, extract, and process the TOC
-    toc_entries = identify_toc(document_text)
-    toc = process_toc(toc_entries)
-    
-    # Write the TOC to output.txt
-    with open('data/output.txt', 'w') as file:
-        for title, page in toc.items():
-            file.write(f'{title} . . . {page}\n')
+        document_text = re.sub(r'\.{3,}', ' ', document_text)
+        pbar.update()
 
-     # load different spaCy models based on document size
-    if len(document_text) < 1000000:
-        nlp = spacy.load("en_core_web_sm")
-    elif len(document_text) < 10000000:
-        nlp = spacy.load("en_core_web_md")
-    else:
-        nlp = spacy.load("en_core_web_lg")
-        
-    nlp = create_entity_ruler(nlp, entity_mapping)
- 
-    # increase the max_length limit
-    nlp.max_length = len(document_text) + 1000000
+        # Identify, extract, and process the TOC
+        print(f'{datetime.now()}: Identifying TOC')
+        toc_entries = identify_toc(document_text)
+        print(f'{datetime.now()}: Processing TOC')
+        toc = process_toc(toc_entries)
+        pbar.update()
 
-    doc = nlp(document_text)
+        # Write the TOC to output.txt
+        print(f'{datetime.now()}: Writing TOC to output.txt')
+        with open('data/output.txt', 'w') as file:
+            for title, page in toc.items():
+                file.write(f'{title} . . . {page}\n')
+        pbar.update()
 
-    sentences = [sent.text + '\n' for sent in doc.sents if sent.text.strip() != '']
-    
-    formatted_sentences = ''.join(sentences)
+        print(f'{datetime.now()}: loading spacY model and creating entity ruler')
+        # load different spaCy models based on document size
+        if len(document_text) < 1000000:
+            nlp = spacy.load("en_core_web_sm")
+        elif len(document_text) < 10000000:
+            nlp = spacy.load("en_core_web_md")
+        else:
+            nlp = spacy.load("en_core_web_lg")
+        pbar.update()
 
-    tokens = [token.text for token in doc]
-    entities = [(ent.text, ent.label_) for ent in doc.ents]
+        nlp = create_entity_ruler(nlp, entity_mapping)
+
+        # increase the max_length limit
+        nlp.max_length = len(document_text) + 1000000
+
+        doc = nlp(document_text)
+
+        sentences = [sent.text + '\n' for sent in doc.sents if sent.text.strip() != '']
+
+        formatted_sentences = ''.join(sentences)
+
+        tokens = [token.text for token in doc]
+        entities = [(ent.text, ent.label_) for ent in doc.ents]
 
     return formatted_sentences, tokens, entities, doc
 
@@ -105,6 +117,7 @@ def generate_summary(doc, top_n=3):
 
 def print_results_to_file(output_file, formatted_sentences, tokens, entities, summary):
     with open(output_file, 'w', encoding='utf-8') as file:
+        print(f'{datetime.now()}: writing results to output file')
         file.write("### Sentences ###\n")
         file.write(formatted_sentences)
 
