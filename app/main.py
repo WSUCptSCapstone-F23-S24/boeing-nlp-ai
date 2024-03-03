@@ -1,6 +1,7 @@
 import spacy
 import fitz  # PyMuPDF
 import re
+from tqdm import tqdm
 from entry_map import entity_mapping
 from spacy.pipeline import EntityRuler
 from collections import Counter
@@ -12,7 +13,7 @@ def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
     text = ""
 
-    for page_num in range(doc.page_count):
+    for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF"):
         page = doc[page_num]
         text += page.get_text()
 
@@ -23,7 +24,7 @@ def extract_text_from_pdf(pdf_path):
 def create_entity_ruler(nlp, entity_mapping):
     ruler = nlp.add_pipe("entity_ruler")  # Add a new EntityRuler to the pipeline
     patterns = []
-    for label, terms in entity_mapping.items():
+    for label, terms in tqdm(entity_mapping.items(), desc="Creating entity patterns"):
         for term in terms:
             patterns.append({"label": label, "pattern": term})
     ruler.add_patterns(patterns)
@@ -37,6 +38,15 @@ def process_large_document(document_path):
             document_text = file.read()
 
     document_text = re.sub(r'\.{3,}', ' ', document_text)
+    
+    # Identify, extract, and process the TOC
+    toc_entries = identify_toc(document_text)
+    toc = process_toc(toc_entries)
+    
+    # Write the TOC to output.txt
+    with open('data/output.txt', 'w') as file:
+        for title, page in toc.items():
+            file.write(f'{title} . . . {page}\n')
 
      # load different spaCy models based on document size
     if len(document_text) < 1000000:
@@ -54,12 +64,27 @@ def process_large_document(document_path):
     doc = nlp(document_text)
 
     sentences = [sent.text + '\n' for sent in doc.sents if sent.text.strip() != '']
+    
     formatted_sentences = ''.join(sentences)
 
     tokens = [token.text for token in doc]
     entities = [(ent.text, ent.label_) for ent in doc.ents]
 
     return formatted_sentences, tokens, entities, doc
+
+def identify_toc(document_text):
+    # This regular expression matches a line of text followed by dots and a number
+    pattern = re.compile(r'.+\.\s+\d+')
+    matches = pattern.findall(document_text)
+    return matches
+
+def process_toc(toc_entries):
+    toc = {}
+    for entry in toc_entries:
+        # Split the entry into title and page number
+        title, page = re.split(r'\.\s+', entry)
+        toc[title.strip()] = int(page)
+    return toc
 
 def contains_number(sentence):
     return any(char.isdigit() for char in sentence.text)
@@ -112,11 +137,11 @@ def main():
     if choice == "1":
         document_path = get_file_path("Select Document File (PDF or text file)")
         output_file = get_file_path("Select Output File")
-
+        
         formatted_sentences, tokens, entities, doc = process_large_document(document_path)
         summary_sentences = generate_summary(doc)
         print_results_to_file(output_file, formatted_sentences, tokens, entities, summary_sentences)
-
+        
         print(f"Results saved to {output_file}")
     elif choice == "2":
         print("Exiting the program.")
