@@ -8,10 +8,13 @@ from collections import Counter
 from tkinter import Tk, filedialog
 from datetime import datetime
 
-# Entity mapping
+# global page count variable
+page_count = 0
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
+    global page_count
+    page_count = doc.page_count
     text = ""
 
     for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF", ncols=100):
@@ -33,7 +36,7 @@ def create_entity_ruler(nlp, entity_mapping):
 
 def process_large_document(document_path):
     print(f'{datetime.now()}: Loading document')
-    with tqdm(total=5, desc="Processing", ncols=100) as pbar:
+    with tqdm(total=page_count, desc="Processing", ncols=100) as pbar:
         if document_path.endswith(".pdf"):
             document_text = extract_text_from_pdf(document_path)
         else:
@@ -95,9 +98,12 @@ def identify_toc(document_text):
 def process_toc(toc_entries):
     toc = {}
     for entry in toc_entries:
-        # Split the entry into title and page number
-        title, page = re.split(r'\.\s+', entry)
-        toc[title.strip()] = int(page)
+        split_entry = re.split(r'\.\s+', entry)
+        if len(split_entry) == 2:
+            title, page = split_entry
+            toc[title] = page
+        else:
+            print(f"Warning: Could not process TOC entry: {entry}")
     return toc
 
 def contains_number(sentence):
