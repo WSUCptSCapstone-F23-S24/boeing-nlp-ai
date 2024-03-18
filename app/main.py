@@ -14,7 +14,7 @@ def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
     text = ""
 
-    for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF"):
+    for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF", ncols=100):
         page = doc[page_num]
         text += page.get_text()
 
@@ -25,7 +25,7 @@ def extract_text_from_pdf(pdf_path):
 def create_entity_ruler(nlp, entity_mapping):
     ruler = nlp.add_pipe("entity_ruler")  # Add a new EntityRuler to the pipeline
     patterns = []
-    for label, terms in tqdm(entity_mapping.items(), desc="Creating entity patterns"):
+    for label, terms in entity_mapping.items():
         for term in terms:
             patterns.append({"label": label, "pattern": term})
     ruler.add_patterns(patterns)
@@ -40,8 +40,10 @@ def process_large_document(document_path):
             with open(document_path, 'r', encoding='utf-8') as file:
                 document_text = file.read()
         pbar.update()
-
+        
+        print(f'{datetime.now()}: Starting re.sub operation')
         document_text = re.sub(r'\.{3,}', ' ', document_text)
+        print(f'{datetime.now()}: Finished re.sub operation')
         pbar.update()
 
         # Identify, extract, and process the TOC
