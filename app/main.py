@@ -8,13 +8,10 @@ from collections import Counter
 from tkinter import Tk, filedialog
 from datetime import datetime
 
-# global page count variable
-page_count = 0
+
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
-    global page_count
-    page_count = doc.page_count
     text = ""
 
     for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF", ncols=100):
@@ -35,8 +32,9 @@ def create_entity_ruler(nlp, entity_mapping):
     return nlp
 
 def process_large_document(document_path):
+    doc = fitz.open(document_path)
     print(f'{datetime.now()}: Loading document')
-    with tqdm(total=page_count, desc="Processing", ncols=100) as pbar:
+    with tqdm(total = 4, desc="Processing", ncols=100) as pbar:
         if document_path.endswith(".pdf"):
             document_text = extract_text_from_pdf(document_path)
         else:
@@ -47,20 +45,6 @@ def process_large_document(document_path):
         print(f'{datetime.now()}: Starting re.sub operation')
         document_text = re.sub(r'\.{3,}', ' ', document_text)
         print(f'{datetime.now()}: Finished re.sub operation')
-        pbar.update()
-
-        # Identify, extract, and process the TOC
-        print(f'{datetime.now()}: Identifying TOC')
-        toc_entries = identify_toc(document_text)
-        print(f'{datetime.now()}: Processing TOC')
-        toc = process_toc(toc_entries)
-        pbar.update()
-
-        # Write the TOC to output.txt
-        print(f'{datetime.now()}: Writing TOC to output.txt')
-        with open('data/output.txt', 'w') as file:
-            for title, page in toc.items():
-                file.write(f'{title} . . . {page}\n')
         pbar.update()
 
         print(f'{datetime.now()}: loading spacY model and creating entity ruler')
@@ -86,25 +70,10 @@ def process_large_document(document_path):
 
         tokens = [token.text for token in doc]
         entities = [(ent.text, ent.label_) for ent in doc.ents]
-
+        
+        print(f'{datetime.now()}: loaded all entities and tokens from document')
+        pbar.update()
     return formatted_sentences, tokens, entities, doc
-
-def identify_toc(document_text):
-    # This regular expression matches a line of text followed by dots and a number
-    pattern = re.compile(r'.+\.\s+\d+')
-    matches = pattern.findall(document_text)
-    return matches
-
-def process_toc(toc_entries):
-    toc = {}
-    for entry in toc_entries:
-        split_entry = re.split(r'\.\s+', entry)
-        if len(split_entry) == 2:
-            title, page = split_entry
-            toc[title] = page
-        else:
-            print(f"Warning: Could not process TOC entry: {entry}")
-    return toc
 
 def contains_number(sentence):
     return any(char.isdigit() for char in sentence.text)
@@ -158,7 +127,7 @@ def main():
     if choice == "1":
         document_path = get_file_path("Select Document File (PDF or text file)")
         output_file = get_file_path("Select Output File")
-        
+
         formatted_sentences, tokens, entities, doc = process_large_document(document_path)
         summary_sentences = generate_summary(doc)
         print_results_to_file(output_file, formatted_sentences, tokens, entities, summary_sentences)
