@@ -1,21 +1,25 @@
 import spacy
 import fitz  # PyMuPDF
 import re
+from tqdm import tqdm
 from entry_map import entity_mapping
 from spacy.pipeline import EntityRuler
 from collections import Counter
 from tkinter import Tk, filedialog
+from datetime import datetime
 from summarizer import Summarizer
 
 def extract_text_from_pdf(pdf_path):
-    try:
-        doc = fitz.open(pdf_path)
-        text = ''.join([doc[page_num].get_text() for page_num in range(doc.page_count)])
-        doc.close()
-        return text
-    except Exception as e:
-        print(f"Error reading PDF file: {e}")
-        return ""
+    doc = fitz.open(pdf_path)
+    text = ""
+
+    for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF", ncols=100):
+        page = doc[page_num]
+        text += page.get_text()
+
+    text = text.replace("�", "•")
+    doc.close()
+    return text
 
 def create_entity_ruler(nlp, entity_mapping):
     ruler = nlp.add_pipe("entity_ruler", before="ner")
@@ -24,28 +28,38 @@ def create_entity_ruler(nlp, entity_mapping):
     return nlp
 
 def process_large_document(document_path):
-    document_text = ""
-    try:
-        if document_path.endswith(".pdf"):
-            document_text = extract_text_from_pdf(document_path)
-        else:
-            with open(document_path, 'r', encoding='utf-8') as file:
-                document_text = file.read()
-    except Exception as e:
-        print(f"Error processing document: {e}")
-        return "", [], [], None
+    print(f'{datetime.now()}: Loading document')
+    with tqdm(total = 4, desc="Processing", ncols=100) as pbar:
+        document_text = ""
+        try:
+            if document_path.endswith(".pdf"):
+                document_text = extract_text_from_pdf(document_path)
+            else:
+                with open(document_path, 'r', encoding='utf-8') as file:
+                    document_text = file.read()
+        except Exception as e:
+            print(f"Error processing document: {e}")
+            return "", [], [], None
+        pbar.update()
+        print(f'{datetime.now()}: Starting re.sub operation')
+        document_text = re.sub(r'\s+', ' ', document_text)  # Normalize whitespace
+        print(f'{datetime.now()}: Finished re.sub operation')
+        pbar.update()
+        
+        print(f'{datetime.now()}: loading spacY model and creating entity ruler')
+        nlp_model = "en_core_web_sm" if len(document_text) < 1e6 else "en_core_web_md" if len(document_text) < 1e7 else "en_core_web_lg"
+        pbar.update()
+        nlp = spacy.load(nlp_model)
+        nlp = create_entity_ruler(nlp, entity_mapping)
+        nlp.max_length = max(nlp.max_length, len(document_text) + 1)  # Safely increase max_length if needed
 
-    document_text = re.sub(r'\s+', ' ', document_text)  # Normalize whitespace
-
-    nlp_model = "en_core_web_sm" if len(document_text) < 1e6 else "en_core_web_md" if len(document_text) < 1e7 else "en_core_web_lg"
-    nlp = spacy.load(nlp_model)
-    nlp = create_entity_ruler(nlp, entity_mapping)
-    nlp.max_length = max(nlp.max_length, len(document_text) + 1)  # Safely increase max_length if needed
-
-    doc = nlp(document_text)
-    formatted_sentences = '\n'.join(sent.text.strip() for sent in doc.sents if sent.text.strip())
-    tokens = [token.text for token in doc]
-    entities = [(ent.text, ent.label_) for ent in doc.ents]
+        doc = nlp(document_text)
+        formatted_sentences = '\n'.join(sent.text.strip() for sent in doc.sents if sent.text.strip())
+        tokens = [token.text for token in doc]
+        entities = [(ent.text, ent.label_) for ent in doc.ents]
+        
+        print(f'{datetime.now()}: loaded all entities and tokens from document')
+        pbar.update()
 
     return formatted_sentences, tokens, entities, doc
 
@@ -68,7 +82,7 @@ def print_results_to_file(output_file, formatted_sentences, entities, summary):
             
             # Assuming summary_clean is a list of sentences/paragraphs
             summary_clean = [sentence.replace('�', '') for sentence in summary]
-
+            print(f'{datetime.now()}: writing results to output file')
             file.write("### Sentences ###\n")
             file.write(formatted_sentences_clean + "\n\n")
             file.write("### Named Entities ###\n")
