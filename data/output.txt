@@ -667,58 +667,44 @@ After Takeoff LANDING GEAR – UP FLAPS – RETRACTED THRUST – SET AS REQUIRED
 HYDRAULIC PUMPS A & B – OFF ELECTRICAL PUMPS A & B – OFF AFT & FWD FUEL PUMPS 1 – OFF AFT & FWD FUEL PUMPS 2 – OFF STANDBY POWER – OFF 86 BATTERY MASTER – OFF
 
 ### Named Entities ###
+Rolls-Royce Trent 800: ENGINE
+General Electric GE90: ENGINE
+Pratt & Whitney PW4090: ENGINE
 Pilot: PERSON
-Julian Lockwood: PERSON
-Locator Transmitter: PERSON
-Path Vector Display: PERSON
-Flap Lever: PERSON
-Max: PERSON
-Max: PERSON
-Max: PERSON
-Number Pad: PERSON
+DC-10s: PERSON
+A340s: PERSON
+Robert J. Collier Trophy: PERSON
+GE90: ENGINE
+GE90: ENGINE
+GE90: ENGINE
+GE90: ENGINE
+PW4090: ENGINE
+PW4000: ENGINE
+PW4000: ENGINE
+PW4090: ENGINE
+PW4000: ENGINE
+PW4000: ENGINE
+PW4000: ENGINE
+max: PERSON
+General Electric GE90: ENGINE
+max: PERSON
+Pratt & Whitney PW4090: ENGINE
+max: PERSON
+Fuel Base Amount: PERSON
+Fuel Base Amount +: PERSON
+Beacon: PERSON
+Alert: PERSON
+Vref: PERSON
+Retard: PERSON
+REL: PERSON
+ONBOARD: PERSON
 Pilot: PERSON
-Pilot: PERSON
-Pilot: PERSON
-Pilot: PERSON
-Pilot: PERSON
-Pilot: PERSON
-Yaw Damper: PERSON
-LEFT: PERSON
-Locator Transmitter: PERSON
-NORMAL: PERSON
-NORMAL: PERSON
-NORMAL: PERSON
-Push: PERSON
-Push: PERSON
-Push: PERSON
-SPEED: PERSON
-SPD Aircraft: PERSON
-Navigation Mode: PERSON
-Navigation Mode: PERSON
-Scale Displays: PERSON
-VIB Engine: PERSON
-Flap Lever: PERSON
-NAV1: PERSON
-Autopilot A.: PERSON
-Autopilot B.: PERSON
-Mach: PERSON
-Mode: PERSON
-B. Note: PERSON
-Switch Use: PERSON
-Button Click: PERSON
-Button Click: PERSON
-Localizer Mode: PERSON
-localizer: PERSON
-Button Click: PERSON
-Button Click: PERSON
-Button Click: PERSON
-Pilot: PERSON
-Switch Use: PERSON
-NAV1: PERSON
-FLARE: PERSON
-Flight Time: PERSON
-Fuel Weight: PERSON
-Fuel Weight: PERSON
+Robert J. Sucarato: PERSON
+Awais Ahsan: PERSON
+Geoffrey Smith: PERSON
+Adam Gaweda: PERSON
+Melvin Rafi: PERSON
+Ryan Wilson: PERSON
 
 ### Summary ###
-1 X-Plane 11 Boeing 737-800 Pilot’s Operating Manual Author: Julian Lockwood (julian@x-plane.com) Copyright: Laminar Research 2018 Disclaimer The information contained in this document is for simulation use only, within the X-Plane flight simulator. Flight Controls ................................................................................................................................. 18 2. Transfer ........................................................................................................................................... 19 4. Pneumatics ...................................................................................................................................... 22 10. A slightly larger model 200 followed in 1967, with increased thrust to compensate for additional weight. Modifications to the landing gear to incorporate the larger engines was required. The ‘Classics’ were larger, quieter and more economical, and also featured EFIS CRT avionics, replacing conventional instrumentation. The MAX variants offer four lengths, with options for 138 to 230 seats and a range of between 3,215 and 3,825 nautical miles. Empty Operating Weight ----------------------------------------- 91,700 lbs. / 1,635 m Range ----------------------------------------- 4,000 nm Service Ceiling ----------------------------------------- 41,000 ft. / When you “fly” an airplane in X- Plane, there are no artificial rules in place to govern how the aircraft behaves. Your control inputs move the control surfaces of the aircraft, and these interact with the virtual flow of air around it. As such, you may consider that you are really flying the aircraft. Checklists are presented later in this document (with modifications to suit this specific simulation platform and model). Use the assigned button/key to toggle the yoke view as required. This will have no effect on the yoke operation. Toggle and Rocker switches are operated with a single click of the mouse. A small white arrow is displayed to confirm the intended direction. More information is available in the X-Plane Desktop Manual. The same can be accomplished using the mouse wheel - if one is present on your device. This indicates that you are ready to rotate the control counter-clockwise. This is discussed in greater detail later in the guide. The B737-800 is equipped with Yokes, for roll and pitch control. 15 The B737-800 is equipped with a Flap lever, which controls the deployment of the flaps for takeoff and landing. To simulate this, assign a peripheral lever to the “Flaps” property in X-Plane. . Forward Overhead Panel The forward overhead panel comprises a collection of smaller panels that manage the aircraft’s electrical, pneumatic, lighting, pressurization, engine start, and other systems. Many of these were previously the domain of a flight engineer in the era of three- person flight crews. Note: Not all of the functions contained within these panels are fully simulated in the X-Plane 737-800 model. If either Nav Radio receiver / Inertial Reference System / Flight Management Computer fails, the associated control switches on this panel may be used to transfer the remaining (good) system to both pilot and first-officer in unison. The SOURCE Rotary is used on the ground for maintenance purposes. The CONTROL PANEL Rotary manually switches control of left and right-side displays to a single EFIS control panel. BAT - forces manual transfer to the standby electrical buses. The APU GEN 1 and APU GEN 2 switches activate the Auxiliary Power Unit electrical generators. Fuel This panel controls the fuel flow and fuel pumps. When open, either of the engines may source fuel from any tank. The anti-collision lights are controlled by the switches at the right side of this panel. Temperature Control This panel monitors and controls the cabin temperature. The pneumatic system provides air for engine starting, air conditioning packs and the wing anti- ice boots. Hydraulic system ‘B’ may be sourced from engine-driven pump #2, or electrical-driven pump #1, or both. The circuit breaker boards themselves are located on the back wall of the cockpit, behind the pilot and first-officer. When ON, the lights are illuminated immediately. The Flight attendant and ground personnel call buttons are located on this panel. When in the (guarded) ARM position, the ELT will activate automatically in the event an impact is detected. For example, clicking the toggle below the VHF1 button will activate audio from the VHF 1 (pilot-side) radio. When ON is selected, this engages NORMAL mode – the EEC uses the current flight conditions (temperature, pressure and other data) to protect from exceeding the redline value for N1 (the low- pressure compressor fan). Redundant Landing Gear Annunciators A separate set of annunciators that indicate the status of the landing gear - to provide redundancy in the event the primary annunciators (on the main instrument panel) fail. The EHSI displays the aircraft’s position & (magnetic) heading. MAIN PANEL controls the backlighting to the upper and lower instrument panels. LOWER DU controls the brightness of the lower-center multi-function display unit (See: xxx). Red indicators are warnings, amber indicators are cautions, and green indicators are for information. Every annunciator light on this panel may be illuminated by moving the LIGHTS switch to TEST. A/P P/RST: Auto-pilot caution or warning. FMC P/RST: Flight Management Computer caution or warning. TAKEOFF CONFIG: Takeoff configuration caution or warning. SPEED BRAKE ARMED: Automatic speed-brake deployment is armed for landing. 2 FMC SPD Aircraft speed is controlled by the FMC (Flight Management Computer) 3 LNAV LNAV (Lateral Navigation Mode) engaged. 33 6 Altitude Scale 7 Flight Director Horizontal Deviation Bar When the aircraft is following a flight-plan, or according to a navigation aid, this bar informs the pilot to climb, or descend, to intercept the desired altitude. MAP: Places the EHSI display in ‘MAP’ mode. The location of the aircraft is presented at the bottom of the screen, and the map incorporates airports, navigation aids and waypoints (within the selected range) that are ahead of, and 45 degrees either side of, this position. 38 Center Panel Multi-Function Panel The N1 SET rotary controls the maximum throttle setting (as a percentage of N1) that may be used by the auto-throttle in TOGA (Take-Off and Go Around) situations. 42 FMS Control Display Units (CDUs) See the (separate) X-Plane 11 Flight Management System (FMS) Manual for comprehensive instructions in relation to the function and operation of the Flight Management System installed in this aircraft. Up: Deployed to the maximum position for ground use. Flap Lever The Flap Lever operates the wing flaps. Control panels are located on either side of the center console, for access by pilot and first-officer. Use the toggle switch located between the frequency displays to select the active frequency (indicated by a green light) Use the rotary controls below each of the frequency displays to change the frequency. The outer-rotary changes the numeric value, and the inner-rotary changes the decimal value. Use the right outer-rotary control to adjust the code in units of 10. Trim This panel features trim adjustments for roll and yaw. You may choose to map a joystick control to this function). 3 C/O Toggle Toggles the IAS / MACH display units between Knots and Mach-number 4 IAS / MACH Display and Rotary When used in conjunction with the Speed Button, and Auto-Throttle, the autopilot will govern the speed according to this value. Use the Rotary Control inner ring to adjust the heading. The autopilot will follow the lateral components of your flight plan. The flight-crew can manually fly the aircraft according to the flight plan - by aligning the attitude indicator with the Flight Director pitch and bank command bars. 14 VS Button Click this button to engage Vertical Speed Mode. Used in conjunction with the auto-throttle, the autopilot will govern the rate of ascent, or descent, according to the value indicated by the Vertical Speed Display. 16 VOR / LOC Button Click this button to engage VOR or Localizer Mode. The autopilot will steer according to the Heading Display / EHSI heading bug. It is recommended the pilot generate a flight plan for the chosen route before using the FMS or GPS units. These tables do not include ground operations. PAX Fwd PAX Mid PAX Aft Cargo Fwd Cargo Aft Payload (lbs.) These differ from those of the real aircraft. The purpose of this inspection is to ensure the aircraft is in a state of readiness for the upcoming flight. As such, correct movement of all control surfaces is necessary for normal flight. Visually check corresponding movement of elevators. Wait for Blue Light illumination on APU panel./n
+Early airliners such as the Boeing 720 could cruise up to Mach 0.90, and the Convair 990 reached speeds up to Mach 0.97. The airplane is larger than all other twinjet or tri-jet airplanes, yet smaller than the 747 and it brings the twin-engine economic advantage to medium- and long-range markets. Launched in February 2000, the two airplanes can fly farther and faster than the A340 competition. Airlines will have additional flexibility in serving the non-stop routes that passengers demand. On February 15th, 1996 the 777 was named the winner of the prestigious Robert J. Collier Trophy by the U.S. National Aeronautic Association, honoring the 777 as the top aeronautical achievement of 1995. Low weight and high thrust equates to optimum revenue earning capability. The most recent model, the PW4098, was certified in July 1998. The PW4000 112-inch fan engine retains the excellent accessibility and component modularity of other PW4000 family members to reduce maintenance time and cost. Boeing 777-200ER Aircraft Operating Manual PAGE 6 The 777-300 flight deck includes a Ground Maneuver Camera System (GMCS), designed to assist the pilot in ground maneuvering the 777-300 with camera views of the nose gear and main gear areas. By standardizing procedures the company can budget flights better financially as flights will always be the same or at least somewhat similar. If fuel in center check, check cross-feed configuration for engine start and take-off.  Make sure throttle is at idle and start engines. DESCENT  Review STAR / ILS charts and weather conditions at destination. Boeing 777-200ER Aircraft Operating Manual PAGE 16  Execute “In Range” Checklist.  Enter missed approach altitude into MCP.  Ensure Auto-brake has engaged and if not engage manually.  If possible continue to destination otherwise attempt to return to origin, inform ATC of intentions and situation.  Stay on or above the glide slope at all times.  Use lowest possible landing speed to minimize damage. This will give the pilot more room to recover and with the 777’s advanced braking capabilities, slowing after a hot landing is not as difficult as in other large aircraft such as the 767-400, 747-400 and 340-600. Most 777 routes are international routes and therefore the 777 pilots (along with the MD-11 pilots) should be the most knowledgeable when it comes to trans-oceanic and international flight planning. The authors grant unlimited rights to Delta Virtual Airlines for modifications and electronic distribution. This is a reference for the virtual flying world and is not to be used for real world aviation.
