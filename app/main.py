@@ -107,7 +107,7 @@ def print_results_to_file(output_file, formatted_sentences, entities, summary):
             # each sentence/paragraph of the summary on a new line
             for sentence in summary_clean:
                 # new line between paragraphs/sentences for better readability -- not functional atm
-                file.write(sentence + "/n")
+                file.write(sentence + "\n")
     except Exception as e:
         print(f"Error writing results to file: {e}")
 
