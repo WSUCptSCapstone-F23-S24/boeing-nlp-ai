@@ -8,6 +8,33 @@ from collections import Counter
 from tkinter import Tk, filedialog
 from datetime import datetime
 from summarizer import Summarizer
+from transformers import T5ForConditionalGeneration, T5Tokenizer
+import openai
+import gradio
+
+client = openai.OpenAI(
+    api_key="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",
+)
+
+messages = [{"role": "system", "content": "You are a Boeing Executive that knows all about the company"}]
+
+def CustomChatGPT(user_input):
+    messages.append({"role": "user", "content": user_input})
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+        )
+    ChatGPT_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": ChatGPT_reply})
+    return ChatGPT_reply
+
+def chatGPT_summarize(summary, entities):
+    entities_str = ', '.join([f"{ent[0]} ({ent[1]})" for ent in entities]) 
+    prompt = f"Document Summary: {summary}\nIdentified Entities: {entities_str}\n\nProvide a detailed summary and critical insights:"
+
+    chat_gpt_response = CustomChatGPT(prompt)
+    
+    return chat_gpt_response
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
@@ -73,6 +100,7 @@ def generate_summary(doc, ratio=0.2):
         return []
     return summary.split('\n')
 
+
 def print_results_to_file(output_file, formatted_sentences, entities, summary):
     try:
         with open(output_file, 'w', encoding='utf-8') as file:
@@ -129,6 +157,9 @@ def main():
         highlighted_entities = [(ent, label) for ent, label in entities if label in entity_list]
         
         summary_sentences = generate_summary(doc, ratio=summary_length)
+
+        response = chatGPT_summarize(summary_sentences, highlighted_entities)
+        print(response)
         
         # Call modified print_results_to_file to include only the relevant entities
         print_results_to_file(output_file, formatted_sentences, highlighted_entities, summary_sentences)
