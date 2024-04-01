@@ -30,7 +30,7 @@ def CustomChatGPT(user_input):
 
 def chatGPT_summarize(summary, entities):
     entities_str = ', '.join([f"{ent[0]} ({ent[1]})" for ent in entities]) 
-    prompt = f"Document Summary: {summary}\nIdentified Entities: {entities_str}\n\nProvide a detailed summary and critical insights:"
+    prompt = f"Document Summary: {summary}\nIdentified Entities: {entities_str}\n\nProvide a detailed summary in no more than 3 paragraphs:"
 
     chat_gpt_response = CustomChatGPT(prompt)
     
