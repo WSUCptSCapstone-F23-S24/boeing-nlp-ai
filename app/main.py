@@ -5,10 +5,9 @@ from tqdm import tqdm
 from entry_map import entity_mapping
 from tkinter import Tk, filedialog
 from datetime import datetime
-from summarizer import Summarizer
 from transformers import T5ForConditionalGeneration, T5Tokenizer
+from summarizer import Summarizer
 import openai
-import gradio
 
 client = openai.OpenAI(
     api_key="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",
