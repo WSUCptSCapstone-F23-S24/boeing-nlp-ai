@@ -3,8 +3,6 @@ import fitz  # PyMuPDF
 import re
 from tqdm import tqdm
 from entry_map import entity_mapping
-from spacy.pipeline import EntityRuler
-from collections import Counter
 from tkinter import Tk, filedialog
 from datetime import datetime
 from summarizer import Summarizer
