@@ -26,10 +26,17 @@ def CustomChatGPT(user_input):
 
 def chatGPT_summarize(summary, entities):
     entities_str = ', '.join([f"{ent[0]} ({ent[1]})" for ent in entities]) 
-    prompt = f"Document Summary: {summary}\nIdentified Entities: {entities_str}\n\nProvide a detailed summary and critical insights:"
+    prompt = f"Document Summary: {summary}\nIdentified Entities: {entities_str}\n\nProvide a detailed summary in no more than 3 paragraphs:"
 
     chat_gpt_response = CustomChatGPT(prompt)
     
+    return chat_gpt_response
+
+def chatGPT_questions(text, question):
+    prompt = f"Given the document: {text}\n\nAnswer the question: {question}"
+
+    chat_gpt_response = CustomChatGPT(prompt)
+
     return chat_gpt_response
 
 def extract_text_from_pdf(pdf_path):
@@ -155,7 +162,15 @@ def main():
         summary_sentences = generate_summary(doc, ratio=summary_length)
 
         response = chatGPT_summarize(summary_sentences, highlighted_entities)
-        print(response)
+        print("Document Summary:", response)
+
+        #text = extract_text_from_pdf(document_path)
+
+        #question = "hi"
+        #while (question != "quit()"):
+        #    question = input("Please type your question about the document (type quit() to exit): ")
+        #    answer = chatGPT_questions(text, question)
+        #    print("Answer:", answer)
         
         # Call modified print_results_to_file to include only the relevant entities
         print_results_to_file(output_file, formatted_sentences, highlighted_entities, summary_sentences)

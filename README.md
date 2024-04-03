@@ -28,6 +28,7 @@ Our goal is to successfully create an NLP model that can accurately and efficien
 4. Tkinter: Used to traverse file paths
 5. BERT Summarizer: Used to assist in summarizing large documents after parsed
 6. Flask: Used to create web application
+7. OpenAI: Used to create instance of AI Chatbot
 
 ### Installation Steps
 
@@ -53,7 +54,7 @@ See 'Startup Guide' for instructions (to be implemented)
 
 ## Known Problems
 
-NLP must be optimized to result in a more accurate summary. Improvement of custom training model can assist with this problem.
+OpenAI API can only accept a set amount of tokens per request. We must split the text up into chunks using LangChain.
 
 
 ## Contributing
@@ -76,6 +77,8 @@ NLP must be optimized to result in a more accurate summary. Improvement of custo
   * [Sprint 4 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint4/README.md)
   * [Sprint 5 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint5/Sprint_Report_5.md)
   * [Sprint 5 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint5/README.md)
+  * [Sprint 6 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint6/Sprint_Report_6.md)
+  * [Sprint 6 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint6/README.md)
 
 ## License
 
