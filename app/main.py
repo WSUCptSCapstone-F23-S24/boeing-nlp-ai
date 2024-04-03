@@ -3,14 +3,10 @@ import fitz  # PyMuPDF
 import re
 from tqdm import tqdm
 from entry_map import entity_mapping
-from spacy.pipeline import EntityRuler
-from collections import Counter
 from tkinter import Tk, filedialog
 from datetime import datetime
 from summarizer import Summarizer
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 import openai
-import gradio
 
 client = openai.OpenAI(
     api_key="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",
