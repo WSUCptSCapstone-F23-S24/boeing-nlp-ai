@@ -5,7 +5,6 @@ from tqdm import tqdm
 from entry_map import entity_mapping
 from tkinter import Tk, filedialog
 from datetime import datetime
-from transformers import T5ForConditionalGeneration, T5Tokenizer
 from summarizer import Summarizer
 import openai
 

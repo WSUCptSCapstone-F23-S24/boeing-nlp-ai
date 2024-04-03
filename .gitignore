@@ -9,5 +9,5 @@ __pycache__/
 .data/output.txt
 .app/output/*
 .app/uploads/*
-
+output/main/_internal/*
 # ADD MORE
