@@ -79,8 +79,8 @@ def select_file_from_list(pdf_files):
         return None
 
 def pdf_directory():
-    pdf_directory = 'rag'  # Example directory where PDFs are located. Adjust as needed.
-    output_directory = 'rag'  # Example directory where you want to save 'converted.txt'. Adjust as needed.
+    pdf_directory = 'rag'  # Directory where PDFs are located. Adjust as needed.
+    output_directory = 'rag'  # Directory where you want to save 'converted.txt'. Adjust as needed.
     output_file_path = os.path.join(output_directory, 'converted.txt')  # Full path to the output file
 
     # Ensure the output directory exists
@@ -99,8 +99,8 @@ def pdf_directory():
 
 pdf_directory()
 
-print("Please wait while file is being PDF is being converted.")
-time.sleep(5)  # Pauses the execution for 5 seconds.
+print("Please wait while file is being PDF is being converted...")
+time.sleep(10)  # Pauses the execution for 10 seconds.
 
 
 #Load the converted document into memory
