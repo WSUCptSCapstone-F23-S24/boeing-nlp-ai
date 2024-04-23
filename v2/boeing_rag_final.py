@@ -69,8 +69,8 @@ def select_file_from_list(pdf_files):
         return None
 
 def pdf_directory():
-    pdf_directory = '.'  # Directory where PDFs are located. Adjust as needed.
-    output_directory = '.'  # Directory where you want to save 'converted.txt'. Adjust as needed.
+    pdf_directory = 'rag'  # Directory where PDFs are located. Adjust as needed.
+    output_directory = 'rag'  # Directory where you want to save 'converted.txt'. Adjust as needed.
     output_file_path = os.path.join(output_directory, 'converted.txt')  # Full path to the output file
 
     # Ensure the output directory exists
@@ -85,6 +85,7 @@ def pdf_directory():
         print(f"Converted {selected_pdf} to text and saved to {txt_file_path}.")
     else:
         print("No PDF selected or available for conversion. Exiting.")
+        time.sleep(2)
         exit()
 
 def ask_questions():
@@ -105,11 +106,11 @@ def ask_questions():
 
 pdf_directory()
 
-print("Please wait while file is being PDF is being converted...")
+print("Please wait while the PDF file is being converted...")
 time.sleep(10)  # Pauses the execution for 10 seconds.
 
 #Load the converted document into memory
-loader = TextLoader('converted.txt')
+loader = TextLoader('rag/converted.txt')
 text_documents = loader.load()
 
 #Split the document into smaller chunks so that llm can work with smaller quantities of tokens

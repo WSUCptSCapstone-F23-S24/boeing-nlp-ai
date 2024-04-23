@@ -10,4 +10,9 @@ __pycache__/
 .app/output/*
 .app/uploads/*
 output/main/_internal/*
+.vscode/
+.venv/
+dist/
+build/
+rag/
 # ADD MORE
