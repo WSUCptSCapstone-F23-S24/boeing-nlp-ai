@@ -84,7 +84,8 @@ def pdf_directory():
         txt_file_path = pdf_to_text_and_save(pdf_path, output_file_path)
         print(f"Converted {selected_pdf} to text and saved to {txt_file_path}.")
     else:
-        print("No PDF selected or available for conversion.")
+        print("No PDF selected or available for conversion. Exiting.")
+        exit()
 
 def ask_questions():
     while True:
