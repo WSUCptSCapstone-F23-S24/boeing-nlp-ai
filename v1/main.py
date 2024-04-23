@@ -2,7 +2,7 @@ import spacy
 import fitz  # PyMuPDF
 import re
 from tqdm import tqdm
-from entry_map import entity_mapping
+from .entry_map import entity_mapping
 from tkinter import Tk, filedialog
 from datetime import datetime
 from summarizer import Summarizer
@@ -40,7 +40,12 @@ def chatGPT_questions(text, question):
     return chat_gpt_response
 
 def extract_text_from_pdf(pdf_path):
-    doc = fitz.open(pdf_path)
+    try:
+        doc = fitz.open(pdf_path)
+    except Exception as e:  # Use only for debugging purposes
+        print(f"An error occurred: {e}")
+        return ""
+    
     text = ""
 
     for page_num in tqdm(range(doc.page_count), desc="Extracting text from PDF", ncols=100):

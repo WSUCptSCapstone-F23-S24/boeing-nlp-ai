@@ -316,8 +316,7 @@ AIRCRAFT DIMENSIONS
  
  
 19 ft 3 in 
-  Height: 
- 
+  Height:  
  
  
  
@@ -615,18 +614,12 @@ SECURING THE AIRCRAFT
   Taxi Lights OFF. 
   Shut down the engines. 
   Seat belt sign off. 
-  
-Once engines have stopped, turn off all navigation and beacon lights. 
-  
-Shut off all fuel pumps, all hydraulics except right demand pump. 
-  
-Disconnect APU bleed, Engine Bleed 
-  
-Disconnect external power and turn off APU.  
-  
-Battery OFF. 
-  
-Execute  Parking  Checklist. 
+  Once engines have stopped, turn off all navigation and beacon lights. 
+  Shut off all fuel pumps, all hydraulics except right demand pump. 
+  Disconnect APU bleed, Engine Bleed 
+  Disconnect external power and turn off APU.  
+  Battery OFF. 
+  Execute  Parking  Checklist. 
  
 Boeing 777-200ER Aircraft Operating Manual 
 PAGE 18 
@@ -688,8 +681,7 @@ ___ REL, ____ ONBOARD
  
  
 ON 
-  Beacon 
- 
+  Beacon  
  
  
  
@@ -809,8 +801,7 @@ SET
  
  
 SET 
-  Arrival Briefing 
- 
+  Arrival Briefing  
  
  
  
@@ -930,8 +921,7 @@ OFF
  
  
 OFF 
-  Beacon 
- 
+  Beacon  
  
  
  
@@ -958,11 +948,9 @@ MISSED APPROACH
 if uncomfortable with the landing. Never try and salvage a landing out of a poor 
 final approach. 
   Call for Max Thrust and flaps 20 . 
-  
-Engage autopilot missed approach course. 
+  Engage autopilot missed approach course. 
   Once positive rate of climb attained, select gear up. 
-  
-At 1,500 feet AGL lower nose to 10 degrees and continue with the take off 
+  At 1,500 feet AGL lower nose to 10 degrees and continue with the take off 
 procedure for cleaning the aircraft up. 
  
 REJECTED TAKE-OFF 
