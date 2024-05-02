@@ -47,15 +47,11 @@ python -m spacy download en_core_web_lg
 
 ## Functionality
 
-'cd' into `./app` and run `python app.py` (for web app) OR `python main.py` (basic command line)
-
-See 'Startup Guide' for instructions (to be implemented)
-
+'cd' into `./v2` and run `python boeing_rag_final.py` or run executable.
 
 ## Known Problems
 
 OpenAI API can only accept a set amount of tokens per request. We must split the text up into chunks using LangChain.
-
 
 ## Contributing
 
