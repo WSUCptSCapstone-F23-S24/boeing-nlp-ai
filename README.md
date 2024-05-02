@@ -75,6 +75,8 @@ OpenAI API can only accept a set amount of tokens per request. We must split the
   * [Sprint 5 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint5/README.md)
   * [Sprint 6 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint6/Sprint_Report_6.md)
   * [Sprint 6 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint6/README.md)
+  * [Sprint 7 Report](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint7/Sprint_Report_7.md)
+  * [Sprint 7 Video](https://github.com/WSUCptSCapstone-F23-S24/boeing-nlp-ai/blob/main/documentation/Sprint7/README.md)
 
 ## License
 
