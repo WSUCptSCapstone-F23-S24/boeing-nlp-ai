@@ -111,32 +111,33 @@ def ask_questions():
         result = chain.invoke(user_input)
         print(f"AI: {result}")
 
-pdf_directory()
+if __name__ == "__main__":
+    pdf_directory()
 
-print("Please wait while the PDF file is being converted...")
-time.sleep(10)  # Pauses the execution for 10 seconds.
+    print("Please wait while the PDF file is being converted...")
+    time.sleep(10)  # Pauses the execution for 10 seconds.
 
-#Load the converted document into memory
-loader = TextLoader('rag/converted.txt')
-text_documents = loader.load()
+    #Load the converted document into memory
+    loader = TextLoader('rag/converted.txt')
+    text_documents = loader.load()
 
-#Split the document into smaller chunks so that llm can work with smaller quantities of tokens
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
-documents = text_splitter.split_documents(text_documents)
+    #Split the document into smaller chunks so that llm can work with smaller quantities of tokens
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
+    documents = text_splitter.split_documents(text_documents)
 
-#Embed the chunks
-embeddings = OpenAIEmbeddings()
+    #Embed the chunks
+    embeddings = OpenAIEmbeddings()
 
-#Load the document into the vector store
-vectorstore = DocArrayInMemorySearch.from_documents(documents, embeddings)
+    #Load the document into the vector store
+    vectorstore = DocArrayInMemorySearch.from_documents(documents, embeddings)
 
-#Setup chain with new parameters
-setup = RunnableParallel(
-    context = vectorstore.as_retriever(), question=RunnablePassthrough()
-)
+    #Setup chain with new parameters
+    setup = RunnableParallel(
+        context = vectorstore.as_retriever(), question=RunnablePassthrough()
+    )
 
-chain = setup | prompt | model | parser
+    chain = setup | prompt | model | parser
 
-ask_questions()
+    ask_questions()
 
 
