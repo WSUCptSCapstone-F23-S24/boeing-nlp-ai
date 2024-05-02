@@ -1,6 +1,6 @@
-from app.entry_map import entity_mapping
+from v1.entry_map import entity_mapping
 import spacy
-import app.main
+from v1.main import *
 
 def test_entity_mapping_contains_key_person():
     assert 'PERSON' in entity_mapping, "The label 'PERSON' should be in the entity_mapping dictionary"
