@@ -3,6 +3,13 @@ import os
 from dotenv import load_dotenv
 import re
 import time
+import warnings
+
+# Set the environment variable to turn off oneDNN custom operations
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
+# Ignore the specific UserWarning from pydantic
+warnings.filterwarnings("ignore", category=UserWarning, module="pydantic._migration")
 
 #Load environment variables
 load_dotenv()
